@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Intratone Gate Opener</string>
+    <string name="get_out_button_on">En cours ...</string>
+    <string name="get_out_button_off">Sortir du garage?</string>
+    <string name="get_in_button_on">En cours ...</string>
+    <string name="get_in_button_off">Entrer dans le garage?</string>
+</resources>
