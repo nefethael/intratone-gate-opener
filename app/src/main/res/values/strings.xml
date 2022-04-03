@@ -4,4 +4,21 @@
     <string name="get_out_button_off">Sortir du garage?</string>
     <string name="get_in_button_on">En cours ...</string>
     <string name="get_in_button_off">Entrer dans le garage?</string>
+    <string name="inner_gate_setting">Portail intérieur</string>
+    <string name="inner_gate_switch">Portail intérieur activé</string>
+    <string name="outer_gate_setting">Portail extérieur</string>
+    <string name="phonenum_hint">07000000000000</string>
+    <string name="settings_btn">Paramètres</string>
+
+
+    <string name="title_activity_settings">Paramètres</string>
+
+    <!-- Preference Titles -->
+    <string name="gates_header">Portails</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cancel">Annuler</string>
+    <string name="start">Ok</string>
+    <string name="dialog_empty_gate">Veuillez configurer les portails!</string>
+
 </resources>

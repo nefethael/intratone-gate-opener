@@ -3,14 +3,17 @@ package fr.nefethael.intratonegateopener;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.telecom.TelecomManager;
 import android.view.View;
 import android.widget.Button;
@@ -27,8 +30,10 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     private final int REQUEST_INTRATONE_PERMISSIONS = 5;
 
-    private final String PHONE_EXTERNAL_GATE = "07000005396734";
-    private final String PHONE_INTERNAL_GATE = "07000005405814";
+    public enum PhoneGate {
+        PHONE_EXTERNAL_GATE,
+        PHONE_INTERNAL_GATE,
+    }
 
     private Handler mainHandler = new Handler();
     private Runnable getInTask = new Runnable() {
@@ -89,6 +94,20 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             }
         });
 
+        // initializing our button.
+        Button settingsBtn = findViewById(R.id.idBtnSettings);
+
+        // adding on click listener for our button.
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // opening a new intent to open settings activity.
+                Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         requestIntratonePermissions();
     }
 
@@ -128,9 +147,50 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     }
 
+    private String getGatePhone(PhoneGate gate){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String gateStg = null;
+        switch(gate){
+            case PHONE_INTERNAL_GATE:
+                boolean innerOk = sharedPreferences.getBoolean("inner_switch", true);
+                String i = sharedPreferences.getString("inner_phone_num", "");
+                if(innerOk){
+                    if (!i.isEmpty()) {
+                        gateStg = i;
+                    }
+                }else{
+                    gateStg = "";
+                }
+                break;
+            case PHONE_EXTERNAL_GATE:
+                String o = sharedPreferences.getString("outer_phone_num", "");
+                if (!o.isEmpty()){
+                    gateStg = o;
+                }
+                break;
+        }
+        return gateStg;
+    }
+
+    private boolean validateSettings(String outerStr, String innerStr){
+        if (outerStr == null || innerStr == null){
+            DialogFragment newFragment = new EmptyGateDialogFragment();
+            newFragment.show(getSupportFragmentManager(), "gate");
+            return false;
+        }
+        return true;
+    }
+
     private void getIn(){
+        String outerStr = getGatePhone(PhoneGate.PHONE_EXTERNAL_GATE);
+        String innerStr = getGatePhone(PhoneGate.PHONE_INTERNAL_GATE);
+
+        if(!validateSettings(outerStr, innerStr)){
+            return;
+        }
+
         // coming from outside open external gate
-        openGate(PHONE_EXTERNAL_GATE);
+        openGate(outerStr);
 
         // wait it opens
         try {
@@ -140,18 +200,29 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         }
 
         // open internal gate
-        openGate(PHONE_INTERNAL_GATE);
+        openGate(innerStr);
     }
 
     private void getOut(){
+        String outerStr = getGatePhone(PhoneGate.PHONE_EXTERNAL_GATE);
+        String innerStr = getGatePhone(PhoneGate.PHONE_INTERNAL_GATE);
+
+        if(!validateSettings(outerStr, innerStr)){
+            return;
+        }
+
         // coming from inside open internal gate
-        openGate(PHONE_INTERNAL_GATE);
+        openGate(innerStr);
 
         // open external gate
-        openGate(PHONE_EXTERNAL_GATE);
+        openGate(outerStr);
     }
 
     private void openGate(String gate){
+        if (gate == null || gate.isEmpty()){
+            return;
+        }
+
         // call dialer
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gate));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
