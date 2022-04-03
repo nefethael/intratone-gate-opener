@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/vincent/AndroidStudioProjects/IntratoneGateOpener/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1965" />
-        <entry key="..\:/Users/vincent/AndroidStudioProjects/IntratoneGateOpener/app/src/main/res/drawable/togglebutton_off.xml" value="0.1" />
-        <entry key="..\:/Users/vincent/AndroidStudioProjects/IntratoneGateOpener/app/src/main/res/drawable/togglebutton_on.xml" value="0.1" />
-        <entry key="..\:/Users/vincent/AndroidStudioProjects/IntratoneGateOpener/app/src/main/res/drawable/tooglebutton_selector.xml" value="0.1965" />
-        <entry key="..\:/Users/vincent/AndroidStudioProjects/IntratoneGateOpener/app/src/main/res/layout/activity_main.xml" value="0.5325034578146611" />
+        <entry key="..\:/Users/vincent/AndroidStudioProjects/intratone-gate-opener/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1965" />
+        <entry key="..\:/Users/vincent/AndroidStudioProjects/intratone-gate-opener/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/vincent/AndroidStudioProjects/intratone-gate-opener/app/src/main/res/drawable/togglebutton_off.xml" value="0.1" />
+        <entry key="..\:/Users/vincent/AndroidStudioProjects/intratone-gate-opener/app/src/main/res/drawable/togglebutton_on.xml" value="0.1" />
+        <entry key="..\:/Users/vincent/AndroidStudioProjects/intratone-gate-opener/app/src/main/res/drawable/tooglebutton_selector.xml" value="0.1965" />
+        <entry key="..\:/Users/vincent/AndroidStudioProjects/intratone-gate-opener/app/src/main/res/layout/activity_main.xml" value="0.5325034578146611" />
       </map>
     </option>
   </component>

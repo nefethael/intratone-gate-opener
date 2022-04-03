@@ -48,6 +48,9 @@ public class SettingsActivity extends AppCompatActivity {
 
             EditTextPreference editTextPreference = getPreferenceManager().findPreference("inner_phone_num");
             editTextPreference.setOnBindEditTextListener(editText -> editText.setInputType(InputType.TYPE_CLASS_PHONE));
+
+            EditTextPreference editTextPreference2 = getPreferenceManager().findPreference("outer_phone_num");
+            editTextPreference2.setOnBindEditTextListener(editText -> editText.setInputType(InputType.TYPE_CLASS_PHONE));
         }
     }
 }
